@@ -1,0 +1,89 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Problem 1 - Name Formatter
+    - name: P1 - budi santoso
+      id: p1test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - budi santoso
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: budi santoso
+        expected-output: 'SANTOSO, Budi'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P1 - john doe
+      id: p1test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - john doe
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: john doe
+        expected-output: 'DOE, John'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P1 - siti rahayu
+      id: p1test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - siti rahayu
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: siti rahayu
+        expected-output: 'RAHAYU, Siti'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P1 - ahmad fauzi
+      id: p1test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - ahmad fauzi
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: ahmad fauzi
+        expected-output: 'FAUZI, Ahmad'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+        
+
+#!/bin/env bash
+
+# HINT: You can test the result of this script using the following command:
+# echo "budi santoso" | ./formatter
+
+# Step 1: Read the full name and split it into two variables at once.
+#   Use: read -r first_name last_name
+read -r budi santoso
+
+# Step 2: Convert last_name to ALL CAPS.
+#   Use bash parameter expansion: ${variable^^}
+#   Example: name="santoso" -> ${name^^} -> "SANTOSO"
+
+# Step 3: Capitalize only the first letter of first_name (Title Case).
+#   First lowercase everything with ${variable,,}, then capitalize with ${variable^}
+#   Example: name="BUDI" -> ${name,,} -> "budi" -> ${name^} -> "Budi"
+
+# Step 4: Print the result in the format: "LASTNAME, Firstname"
+#   Use: echo "$last_upper, $first_title"
+
+# TODO: Replace this line with your implementation
+echo "TODO"

@@ -11,3 +11,4 @@ first_title=${first_title^}
 
 # Tampilkan hasil
 echo "$last_upper, $first_title"
+
