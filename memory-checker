@@ -1,0 +1,25 @@
+#!/bin/env bash
+
+# Read input
+read -r total_mb
+read -r used_mb
+
+# Calculate free memory
+free_mb=$(( total_mb - used_mb ))
+
+# Calculate usage percentage
+usage=$(( used_mb * 100 / total_mb ))
+
+# Determine status
+if (( usage >= 90 )); then
+    status="Critical"
+elif (( usage >= 70 )); then
+    status="Warning"
+else
+    status="Normal"
+fi
+
+# Output
+echo "Free: $free_mb MB"
+echo "Usage: $usage%"
+echo "Status: $status"

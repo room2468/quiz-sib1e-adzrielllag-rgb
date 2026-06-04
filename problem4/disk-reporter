@@ -36,3 +36,33 @@ done
 echo "Total usage: $total MB"
 echo "Highest user: $highest_user ($highest_size MB)"
 echo "Users over 1000 MB: $over_limit"
+
+#!/bin/env bash
+
+total=0
+highest_user=""
+highest_size=0
+over_limit=0
+
+while IFS= read -r line; do
+    # Split line
+    read -r username size <<< "$line"
+
+    # Add to total
+    (( total += size ))
+
+    # Check highest usage
+    if (( size > highest_size )); then
+        highest_size=$size
+        highest_user=$username
+    fi
+
+    # Count users over 1000 MB
+    if (( size > 1000 )); then
+        (( over_limit++ ))
+    fi
+done
+
+echo "Total usage: $total MB"
+echo "Highest user: $highest_user ($highest_size MB)"
+echo "Users over 1000 MB: $over_limit"
